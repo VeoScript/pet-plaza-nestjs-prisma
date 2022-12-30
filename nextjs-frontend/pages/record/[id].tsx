@@ -1,12 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import Router from 'next/router'
 import { useRouter } from 'next/router'
 import { useGetPet } from '../../helpers/react-query/query'
+import { useDeletePet } from '../../helpers/react-query/mutation'
 
 const View = () => {
 
   const router: any = useRouter()
+
+  const deletePet = useDeletePet()
 
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
 
@@ -18,7 +22,16 @@ const View = () => {
 
   const handleDeletePet = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    console.log('Delete Pet Details')
+    setIsDeleteLoading(true)
+    await deletePet.mutateAsync({ id }, {
+      onError: () => {
+        setIsDeleteLoading(false)
+      },
+      onSuccess: () => {
+        setIsDeleteLoading(false)
+        Router.push('/')
+      }
+    })
   }
   
   return (
