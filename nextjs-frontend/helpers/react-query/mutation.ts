@@ -15,6 +15,7 @@ export const useRegisterPet = () => {
       onSuccess: (data) => {
         console.log('registered data', data)
         queryClient.invalidateQueries(['pets'])
+        queryClient.invalidateQueries(['pet'])
       }
     }
   )

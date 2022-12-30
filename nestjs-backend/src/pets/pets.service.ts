@@ -25,13 +25,32 @@ export class PetsService {
       select: {
         id: true,
         name: true,
-        owner: true
+        owner: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
       }
     });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} pet`;
+    return this.prisma.pet.findUnique({
+      where: {
+        id
+      },
+      select: {
+        id: true,
+        name: true,
+        owner: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    })
   }
 
   update(id: number, updatePetDto: UpdatePetDto) {
