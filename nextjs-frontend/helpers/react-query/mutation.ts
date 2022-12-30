@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import api from '../Axios'
 
 export const useRegisterPet = () => {
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
   return useMutation((_args: { petName: string, ownerName: string }) =>
     api.post('/pets', {
       petName: _args.petName,
@@ -14,7 +14,7 @@ export const useRegisterPet = () => {
       },
       onSuccess: (data) => {
         console.log('registered data', data)
-        // queryClient.invalidateQueries(['pets'])
+        queryClient.invalidateQueries(['pets'])
       }
     }
   )

@@ -21,7 +21,13 @@ export class PetsService {
   }
 
   findAll() {
-    return this.prisma.pet.findMany();
+    return this.prisma.pet.findMany({
+      select: {
+        id: true,
+        name: true,
+        owner: true
+      }
+    });
   }
 
   findOne(id: number) {
