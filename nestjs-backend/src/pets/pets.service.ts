@@ -54,7 +54,24 @@ export class PetsService {
   }
 
   update(id: number, updatePetDto: UpdatePetDto) {
-    return `This action updates a #${id} pet`;
+    return this.prisma.pet.update({
+      where: {
+        id
+      },
+      data: {
+        name: updatePetDto.petName,
+        owner: {
+          update: {
+            where: {
+              id
+            },
+            data: {
+              name: updatePetDto.ownerName
+            }
+          }
+        }
+      }
+    })
   }
 
   remove(id: number) {
