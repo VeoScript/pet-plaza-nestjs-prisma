@@ -22,6 +22,9 @@ export class PetsService {
 
   findAll() {
     return this.prisma.pet.findMany({
+      orderBy: {
+        id: 'desc'
+      },
       select: {
         id: true,
         name: true,
@@ -75,6 +78,10 @@ export class PetsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} pet`;
+    return this.prisma.pet.delete({
+      where: {
+        id
+      }
+    })
   }
 }

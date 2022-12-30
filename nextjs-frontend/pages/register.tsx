@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import Router from 'next/router'
 import { useRegisterPet } from '../helpers/react-query/mutation'
 
 const Register = () => {
@@ -35,6 +36,7 @@ const Register = () => {
         setOwnerName('')
         setPetNameError('')
         setOwnerNameError('')
+        Router.push('/')
       }
     })
   }

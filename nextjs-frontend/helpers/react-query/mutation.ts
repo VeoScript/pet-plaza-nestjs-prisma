@@ -40,3 +40,21 @@ export const useUpdatePet = () => {
     }
   )
 }
+
+export const useDeletePet = () => {
+  const queryClient = useQueryClient()
+  return useMutation((_args: { id: string }) =>
+    api.delete(`/pets/${_args.id}`),
+    {
+      onError: (error: any) => {
+        console.error('DELETE PET ERROR', error)
+      },
+      onSuccess: (data) => {
+        console.log('updated data', data)
+        queryClient.invalidateQueries(['pets'])
+        queryClient.invalidateQueries(['pet'])
+      }
+    }
+  )
+}
+
