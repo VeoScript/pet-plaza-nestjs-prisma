@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePetDto {
-  @ApiProperty()
+  @ApiProperty({ required: true })
   petName: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   ownerName: string;
 }
