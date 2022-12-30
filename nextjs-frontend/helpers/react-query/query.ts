@@ -1,3 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import api from '../Axios'
 
-// logic and functions here...
+export const useGetPets = () => {
+  return useQuery(['pets'],
+    async () => {
+      const pets = await api.get(`/pets`)
+      return pets.data
+    }
+  )
+}
